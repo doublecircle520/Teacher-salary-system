@@ -4,28 +4,28 @@
 #include<string.h>
 struct teacher
 {
-	char num[10];//½ÌÊ¦¹¤ºÅ
-	char depart[20];//²¿ÃÅÃû³Æ
-	int basepay;//»ù±¾¹¤×Ê
-	int meritpay;//¼¨Ğ§¹¤×Ê
-	int jobpay;//Ö°Îñ¹¤×Ê
-	int cutpay;//¿Û¿î
-	int finalpay;//Êµ·¢¹¤×Ê
+	char num[10];//æ•™å¸ˆå·¥å·
+	char depart[20];//éƒ¨é—¨åç§°
+	int basepay;//åŸºæœ¬å·¥èµ„
+	int meritpay;//ç»©æ•ˆå·¥èµ„
+	int jobpay;//èŒåŠ¡å·¥èµ„
+	int cutpay;//æ‰£æ¬¾
+	int finalpay;//å®å‘å·¥èµ„
 };
 struct node
 {
 	struct teacher data;
 	struct node* next;
 };
-struct node* createlist()//´´½¨Á´±í
+struct node* createlist()//åˆ›å»ºé“¾è¡¨
 {
 	struct node* headnode = (struct node*)malloc(sizeof(struct node));
-	//±íÍ·£º¶ÔÊı¾İÓòdata²»×ö³õÊ¼»¯
+	//è¡¨å¤´ï¼šå¯¹æ•°æ®åŸŸdataä¸åšåˆå§‹åŒ–
 	headnode->next = NULL;
 	return headnode;
 }
 struct node* list = createlist();
-struct node* createnode(struct teacher data)//´´½¨½áµã
+struct node* createnode(struct teacher data)//åˆ›å»ºç»“ç‚¹
 {
 	struct node* newnode = (struct node*)malloc(sizeof(struct node));
 	newnode->data = data;
@@ -33,12 +33,12 @@ struct node* createnode(struct teacher data)//´´½¨½áµã
 	newnode->next = NULL;
 	return newnode;
 }
-void sort(struct node*headnode)//¶ÔÁ´±íÊı¾İ½øĞĞÅÅĞò£¨Êµ·¢¹¤×Ê£©
+void sort(struct node*headnode)//å¯¹é“¾è¡¨æ•°æ®è¿›è¡Œæ’åºï¼ˆå®å‘å·¥èµ„ï¼‰
 {
 	struct node* p = headnode->next;
 	struct node* q = headnode->next;
 	struct teacher teacher1;
-	for (; p->next; p = p->next) { // È·¶¨±È½Ï´ÎÊı
+	for (; p->next; p = p->next) { // ç¡®å®šæ¯”è¾ƒæ¬¡æ•°
 
 		for (q = headnode->next; q->next; q = q->next) {
 			if (q->data.finalpay > q->next->data.finalpay) {
@@ -51,10 +51,10 @@ void sort(struct node*headnode)//¶ÔÁ´±íÊı¾İ½øĞĞÅÅĞò£¨Êµ·¢¹¤×Ê£©
 
 	}
 }
-void printlist(struct node* headnode)//´òÓ¡µ¥Á´±í
+void printlist(struct node* headnode)//æ‰“å°å•é“¾è¡¨
 {
 	struct node* pmove = headnode->next;
-	printf("½ÌÊ¦¹¤ºÅ\t²¿ÃÅÃû³Æ\t»ù±¾¹¤×Ê\t¼¨Ğ§¹¤×Ê\tÖ°Îñ¹¤×Ê\t¿Û¿î\tÊµ·¢¹¤×Ê\n");
+	printf("æ•™å¸ˆå·¥å·\téƒ¨é—¨åç§°\tåŸºæœ¬å·¥èµ„\tç»©æ•ˆå·¥èµ„\tèŒåŠ¡å·¥èµ„\tæ‰£æ¬¾\tå®å‘å·¥èµ„\n");
 	sort(headnode);
 	pmove = headnode->next;
 	while (pmove!=NULL)
@@ -64,20 +64,20 @@ void printlist(struct node* headnode)//´òÓ¡µ¥Á´±í
 	}
 	printf("\n");
 }
-void insertnode(struct node* headnode, struct teacher data)//²åÈë½áµã(Í·²å·¨)
+void insertnode(struct node* headnode, struct teacher data)//æ’å…¥ç»“ç‚¹(å¤´æ’æ³•)
 {
 	struct node* newnode = createnode(data);
 	newnode->next = headnode->next;
 	headnode->next = newnode;
 }
-void deleatnode1(struct node* headnode, char* depart)//ÅúÁ¿É¾³ıĞÅÏ¢
+void deleatnode1(struct node* headnode, char* depart)//æ‰¹é‡åˆ é™¤ä¿¡æ¯
 {
 	struct node* posnode = headnode->next;
 	struct node* frontnode = headnode;
 	int flag=0;
 	if (posnode == NULL)
 	{
-		printf("¡¾Êı¾İÎª¿Õ£¬ÎŞ·¨É¾³ı¡¿\n");
+		printf("ã€æ•°æ®ä¸ºç©ºï¼Œæ— æ³•åˆ é™¤ã€‘\n");
 		return;
 	}
 	printf("%s", depart);
@@ -99,20 +99,20 @@ void deleatnode1(struct node* headnode, char* depart)//ÅúÁ¿É¾³ıĞÅÏ¢
 	}
 	if (flag == 0)
 	{
-		printf("Î´ÕÒµ½%s½ÌÊ¦ĞÅÏ¢",depart);
+		printf("æœªæ‰¾åˆ°%sæ•™å¸ˆä¿¡æ¯",depart);
 	}
 	else
 	{
-		printf("%s½ÌÊ¦ĞÅÏ¢É¾³ı³É¹¦", depart);
+		printf("%sæ•™å¸ˆä¿¡æ¯åˆ é™¤æˆåŠŸ", depart);
 	}
 }
-void deleatnode(struct node* headnode,char*num)//É¾³ı½áµã
+void deleatnode(struct node* headnode,char*num)//åˆ é™¤ç»“ç‚¹
 {
 	struct node* posnode = headnode->next;
 	struct node* frontnode = headnode;
 	if (posnode == NULL)
 	{
-		printf("¡¾Êı¾İÎª¿Õ£¬ÎŞ·¨É¾³ı¡¿\n");
+		printf("ã€æ•°æ®ä¸ºç©ºï¼Œæ— æ³•åˆ é™¤ã€‘\n");
 		return;
 	}
 	while (strcmp(posnode->data.num,num))
@@ -121,21 +121,21 @@ void deleatnode(struct node* headnode,char*num)//É¾³ı½áµã
 		posnode = frontnode->next;
 		if (posnode == NULL)
 		{
-			printf("¡¾Î´ÕÒµ½Ö¸¶¨Î»ÖÃ£¬ÎŞ·¨É¾³ı¡¿\n");
+			printf("ã€æœªæ‰¾åˆ°æŒ‡å®šä½ç½®ï¼Œæ— æ³•åˆ é™¤ã€‘\n");
 			return;
 		}
 	}
 	frontnode->next = posnode->next;
 	free(posnode);
-	printf("¡¾Ö¸¶¨ĞÅÏ¢É¾³ı³É¹¦¡¿\n");
+	printf("ã€æŒ‡å®šä¿¡æ¯åˆ é™¤æˆåŠŸã€‘\n");
 }
-void searchnode1(struct node* headnode, char* depart)//Á´±í²éÕÒ(²¿ÃÅÃû³Æ²éÕÒ)
+void searchnode1(struct node* headnode, char* depart)//é“¾è¡¨æŸ¥æ‰¾(éƒ¨é—¨åç§°æŸ¥æ‰¾)
 {
 	struct node* pmove = headnode->next;
 	int num = 0;
 	if (pmove == NULL)
 	{
-		printf("¡¾Á´±íÎª¿Õ£¬ÎŞ·¨²éÕÒ¡¿\n");
+		printf("ã€é“¾è¡¨ä¸ºç©ºï¼Œæ— æ³•æŸ¥æ‰¾ã€‘\n");
 		return;
 	}
 	for (pmove = headnode->next; pmove != NULL; pmove = pmove->next)
@@ -144,7 +144,7 @@ void searchnode1(struct node* headnode, char* depart)//Á´±í²éÕÒ(²¿ÃÅÃû³Æ²éÕÒ)
 		{
 			if (num == 0)
 			{
-				printf("½ÌÊ¦¹¤ºÅ\t²¿ÃÅÃû³Æ\t»ù±¾¹¤×Ê\t¼¨Ğ§¹¤×Ê\tÖ°Îñ¹¤×Ê\t¿Û¿î\tÊµ·¢¹¤×Ê\n");
+				printf("æ•™å¸ˆå·¥å·\téƒ¨é—¨åç§°\tåŸºæœ¬å·¥èµ„\tç»©æ•ˆå·¥èµ„\tèŒåŠ¡å·¥èµ„\tæ‰£æ¬¾\tå®å‘å·¥èµ„\n");
 				num++;
 			}
 			printf("%s\t\t%s\t%d\t\t%d\t\t%d\t\t%d\t%d\n", pmove->data.num, pmove->data.depart, pmove->data.basepay, pmove->data.meritpay, pmove->data.jobpay, pmove->data.cutpay, pmove->data.finalpay);
@@ -152,15 +152,15 @@ void searchnode1(struct node* headnode, char* depart)//Á´±í²éÕÒ(²¿ÃÅÃû³Æ²éÕÒ)
 	}
 	if (num==0)
 	{
-		printf("¡¾Ã»ÓĞÕÒµ½Ïà¹ØĞÅÏ¢¡¿");
+		printf("ã€æ²¡æœ‰æ‰¾åˆ°ç›¸å…³ä¿¡æ¯ã€‘");
 	}
 }
-void searchnode(struct node* headnode, char* num)//Á´±í²éÕÒ(¹¤ºÅ²éÕÒ)
+void searchnode(struct node* headnode, char* num)//é“¾è¡¨æŸ¥æ‰¾(å·¥å·æŸ¥æ‰¾)
 {
 	struct node* pmove = headnode->next;
 	if (pmove == NULL)
 	{
-		printf("¡¾Á´±íÎª¿Õ£¬ÎŞ·¨²éÕÒ¡¿\n");
+		printf("ã€é“¾è¡¨ä¸ºç©ºï¼Œæ— æ³•æŸ¥æ‰¾ã€‘\n");
 		return;
 	}
 	while (strcmp(pmove->data.num, num))
@@ -171,13 +171,13 @@ void searchnode(struct node* headnode, char* num)//Á´±í²éÕÒ(¹¤ºÅ²éÕÒ)
 	}
 	if (pmove)
 	{
-		printf("½ÌÊ¦¹¤ºÅ\t²¿ÃÅÃû³Æ\t»ù±¾¹¤×Ê\t¼¨Ğ§¹¤×Ê\tÖ°Îñ¹¤×Ê\t¿Û¿î\tÊµ·¢¹¤×Ê\n");
+		printf("æ•™å¸ˆå·¥å·\téƒ¨é—¨åç§°\tåŸºæœ¬å·¥èµ„\tç»©æ•ˆå·¥èµ„\tèŒåŠ¡å·¥èµ„\tæ‰£æ¬¾\tå®å‘å·¥èµ„\n");
 		printf("%s\t\t%s\t%d\t\t%d\t\t%d\t\t%d\t%d\n", pmove->data.num, pmove->data.depart, pmove->data.basepay, pmove->data.meritpay, pmove->data.jobpay, pmove->data.cutpay, pmove->data.finalpay);
 		return;
 	}
 	else
 	{
-		printf("¡¾Ã»ÓĞÕÒµ½Ïà¹ØĞÅÏ¢¡¿\n");
+		printf("ã€æ²¡æœ‰æ‰¾åˆ°ç›¸å…³ä¿¡æ¯ã€‘\n");
 		return;
 	}
 }
@@ -186,7 +186,7 @@ void changenode(struct node* headnode, char* num)
 	struct node* pmove = headnode->next;
 	if (pmove == NULL)
 	{
-		printf("¡¾Á´±íÎª¿Õ£¬²»¿ÉĞŞ¸Ä¡¿\n");
+		printf("ã€é“¾è¡¨ä¸ºç©ºï¼Œä¸å¯ä¿®æ”¹ã€‘\n");
 		return;
 	}
 	while (strcmp(pmove->data.num, num))
@@ -197,14 +197,14 @@ void changenode(struct node* headnode, char* num)
 	}
 	if (pmove)
 	{
-		printf("ÇëÊäÈëĞŞ¸ÄĞÅÏ¢\n");
+		printf("è¯·è¾“å…¥ä¿®æ”¹ä¿¡æ¯\n");
 		scanf("%s%s%d%d%d%d", pmove->data.num, pmove->data.depart, &pmove->data.basepay, &pmove->data.meritpay, &pmove->data.jobpay, &pmove->data.cutpay);
-		printf("¡¾ĞŞ¸ÄĞÅÏ¢³É¹¦¡¿\n");
+		printf("ã€ä¿®æ”¹ä¿¡æ¯æˆåŠŸã€‘\n");
 		return;
 	}
 	else
 	{
-		printf("¡¾ÎŞÏà¹ØĞÅÏ¢£¬ÎŞ·¨ĞŞ¸Ä¡¿\n");
+		printf("ã€æ— ç›¸å…³ä¿¡æ¯ï¼Œæ— æ³•ä¿®æ”¹ã€‘\n");
 		return;
 	}
 }
@@ -223,11 +223,11 @@ void upbasepay(struct node*headnode, char*depart, int up)
 	}
 	if (flag == 0)
 	{
-		printf("Î´ÕÒµ½Ïà¹Ø²¿ÃÅĞÅÏ¢£¡\n");
+		printf("æœªæ‰¾åˆ°ç›¸å…³éƒ¨é—¨ä¿¡æ¯ï¼\n");
 	}
 	else
 	{
-		printf("%s %dÃû½ÌÊ¦»ù±¾¹¤×ÊĞŞ¸ÄÍê±Ï¡£\n",depart,flag);
+		printf("%s %dåæ•™å¸ˆåŸºæœ¬å·¥èµ„ä¿®æ”¹å®Œæ¯•ã€‚\n",depart,flag);
 	}
 }
 void upjobpay(struct node* headnode, int merit, int up)
@@ -245,14 +245,14 @@ void upjobpay(struct node* headnode, int merit, int up)
 	}
 	if (flag == 0)
 	{
-		printf("¼¨Ğ§¹¤×ÊÕÇĞ½±ê×¼¹ı¸ß£¬Î´ÄÜÕÒµ½·ûºÏÊı¾İ £¡\n");
+		printf("ç»©æ•ˆå·¥èµ„æ¶¨è–ªæ ‡å‡†è¿‡é«˜ï¼Œæœªèƒ½æ‰¾åˆ°ç¬¦åˆæ•°æ® ï¼\n");
 	}
 	else
 	{
-		printf("ÒÑÎª%dÃûÓÅĞã½ÌÊ¦Ìá¸ßÖ°Îñ¹¤×Ê.\n", flag);
+		printf("å·²ä¸º%dåä¼˜ç§€æ•™å¸ˆæé«˜èŒåŠ¡å·¥èµ„.\n", flag);
 	}
 }
-void writeExcel(struct node *headnode,char* num)//Éú³ÉÖ¸¶¨½ÌÊ¦¹¤×Ê±¨±í
+void writeExcel(struct node *headnode,char* num)//ç”ŸæˆæŒ‡å®šæ•™å¸ˆå·¥èµ„æŠ¥è¡¨
 {
 	FILE* fp = NULL;
 	struct node* movenode=headnode->next;
@@ -261,15 +261,15 @@ void writeExcel(struct node *headnode,char* num)//Éú³ÉÖ¸¶¨½ÌÊ¦¹¤×Ê±¨±í
 	{
 		if (strcmp(movenode->data.num, num) == 0)
 		{
-			fprintf(fp, "½ÌÊ¦¹¤ºÅ\t²¿ÃÅÃû³Æ\t»ù±¾¹¤×Ê\t¼¨Ğ§¹¤×Ê\tÖ°Îñ¹¤×Ê\t¿Û¿î\tÊµ·¢¹¤×Ê\n");
+			fprintf(fp, "æ•™å¸ˆå·¥å·\téƒ¨é—¨åç§°\tåŸºæœ¬å·¥èµ„\tç»©æ•ˆå·¥èµ„\tèŒåŠ¡å·¥èµ„\tæ‰£æ¬¾\tå®å‘å·¥èµ„\n");
 			fprintf(fp, "%s\t%s\t%d\t%d\t%d\t%d\t%d", movenode->data.num, movenode->data.depart, movenode->data.basepay, movenode->data.meritpay, movenode->data.jobpay, movenode->data.cutpay, movenode->data.finalpay);
 		}
 		movenode = movenode->next;
 	}
-	printf("¹¤×Ê±¨±íÉú³É³É¹¦£¡\n");
+	printf("å·¥èµ„æŠ¥è¡¨ç”ŸæˆæˆåŠŸï¼\n");
 	fclose(fp);
 }
-void writeExcel1(struct node* headnode, char* depart)//Éú³ÉÖ¸¶¨²¿ÃÅ¹¤×Ê±¨±í
+void writeExcel1(struct node* headnode, char* depart)//ç”ŸæˆæŒ‡å®šéƒ¨é—¨å·¥èµ„æŠ¥è¡¨
 {
 	FILE* fp = NULL;
 	int flag=0;
@@ -281,7 +281,7 @@ void writeExcel1(struct node* headnode, char* depart)//Éú³ÉÖ¸¶¨²¿ÃÅ¹¤×Ê±¨±í
 		{
 			if (flag == 0)
 			{
-				fprintf(fp, "½ÌÊ¦¹¤ºÅ\t²¿ÃÅÃû³Æ\t»ù±¾¹¤×Ê\t¼¨Ğ§¹¤×Ê\tÖ°Îñ¹¤×Ê\t¿Û¿î\tÊµ·¢¹¤×Ê\n");
+				fprintf(fp, "æ•™å¸ˆå·¥å·\téƒ¨é—¨åç§°\tåŸºæœ¬å·¥èµ„\tç»©æ•ˆå·¥èµ„\tèŒåŠ¡å·¥èµ„\tæ‰£æ¬¾\tå®å‘å·¥èµ„\n");
 				fprintf(fp, "%s\t%s\t%d\t%d\t%d\t%d\t%d\n", movenode->data.num, movenode->data.depart, movenode->data.basepay, movenode->data.meritpay, movenode->data.jobpay, movenode->data.cutpay, movenode->data.finalpay);
 				flag++;
 			}
@@ -292,10 +292,10 @@ void writeExcel1(struct node* headnode, char* depart)//Éú³ÉÖ¸¶¨²¿ÃÅ¹¤×Ê±¨±í
 		}
 		movenode = movenode->next;
 	}
-	printf("%s¹¤×Ê±¨±íÉú³É³É¹¦£¡\n",depart);
+	printf("%så·¥èµ„æŠ¥è¡¨ç”ŸæˆæˆåŠŸï¼\n",depart);
 	fclose(fp);
 }
-void writeExcel2(struct node* headnode)//´òÓ¡ËùÓĞ½ÌÊ¦¹¤×Ê±¨±í
+void writeExcel2(struct node* headnode)//æ‰“å°æ‰€æœ‰æ•™å¸ˆå·¥èµ„æŠ¥è¡¨
 {
 	FILE* fp = NULL;
 	int flag = 0;
@@ -305,7 +305,7 @@ void writeExcel2(struct node* headnode)//´òÓ¡ËùÓĞ½ÌÊ¦¹¤×Ê±¨±í
 	{
 			if (flag == 0)
 			{
-				fprintf(fp, "½ÌÊ¦¹¤ºÅ\t²¿ÃÅÃû³Æ\t»ù±¾¹¤×Ê\t¼¨Ğ§¹¤×Ê\tÖ°Îñ¹¤×Ê\t¿Û¿î\tÊµ·¢¹¤×Ê\n");
+				fprintf(fp, "æ•™å¸ˆå·¥å·\téƒ¨é—¨åç§°\tåŸºæœ¬å·¥èµ„\tç»©æ•ˆå·¥èµ„\tèŒåŠ¡å·¥èµ„\tæ‰£æ¬¾\tå®å‘å·¥èµ„\n");
 				fprintf(fp, "%s\t%s\t%d\t%d\t%d\t%d\t%d\n", movenode->data.num, movenode->data.depart, movenode->data.basepay, movenode->data.meritpay, movenode->data.jobpay, movenode->data.cutpay, movenode->data.finalpay);
 				flag++;
 			}
@@ -315,17 +315,17 @@ void writeExcel2(struct node* headnode)//´òÓ¡ËùÓĞ½ÌÊ¦¹¤×Ê±¨±í
 			}
 		movenode = movenode->next;
 	}
-	printf("È«²¿½ÌÊ¦¹¤×Ê±¨±íÉú³É³É¹¦£¡\n" );
+	printf("å…¨éƒ¨æ•™å¸ˆå·¥èµ„æŠ¥è¡¨ç”ŸæˆæˆåŠŸï¼\n" );
 	fclose(fp);
 }
-//ÎÄ¼ş¶Á²Ù×÷
+//æ–‡ä»¶è¯»æ“ä½œ
 void readfile(struct node* headnode, char* filename)
 {
-	//´ò¿ªÎÄ¼ş
+	//æ‰“å¼€æ–‡ä»¶
 	FILE* fp;
 	struct teacher data;
 	fp = fopen(filename, "r");
-	//¶ÁÎÄ¼ş
+	//è¯»æ–‡ä»¶
 	while (!feof(fp))
 	{
 		fscanf(fp, "%s\t%s\t%d\t%d\t%d\t%d\n", data.num, data.depart, &data.basepay, &data.meritpay, &data.jobpay, &data.cutpay);
@@ -335,10 +335,10 @@ void readfile(struct node* headnode, char* filename)
 	{
 		insertnode(list, data);
 	}*/
-	//¹Ø±ÕÎÄ¼ş
+	//å…³é—­æ–‡ä»¶
 	fclose(fp);
 }
-//ÎÄ¼şĞ´²Ù×÷
+//æ–‡ä»¶å†™æ“ä½œ
 void writefile(struct node* headnode, char* filename)
 {
 	FILE* fp;
@@ -351,130 +351,130 @@ void writefile(struct node* headnode, char* filename)
 	}
 	fclose(fp);
 }
-void menu()//²Ëµ¥º¯Êı
+void menu()//èœå•å‡½æ•°
 {
-	printf("-------------½ÌÊ¦¹¤×Ê¹ÜÀíÏµÍ³-----------------\n");
-	printf("\t\t0.ÍË³öÏµÍ³\n");
-	printf("\t\t1.Â¼ÈëĞÅÏ¢\n");
-	printf("\t\t2.ä¯ÀÀĞÅÏ¢\n");
-	printf("\t\t3.²éÕÒĞÅÏ¢\n");
-	printf("\t\t4.É¾³ıĞÅÏ¢\n");
-	printf("\t\t5.ĞŞ¸ÄĞÅÏ¢\n");
-	printf("\t\t6.ÅúÁ¿´¦Àí\n");
-	printf("\t\t7.´òÓ¡±¨±í\n");
+	printf("-------------æ•™å¸ˆå·¥èµ„ç®¡ç†ç³»ç»Ÿ-----------------\n");
+	printf("\t\t0.é€€å‡ºç³»ç»Ÿ\n");
+	printf("\t\t1.å½•å…¥ä¿¡æ¯\n");
+	printf("\t\t2.æµè§ˆä¿¡æ¯\n");
+	printf("\t\t3.æŸ¥æ‰¾ä¿¡æ¯\n");
+	printf("\t\t4.åˆ é™¤ä¿¡æ¯\n");
+	printf("\t\t5.ä¿®æ”¹ä¿¡æ¯\n");
+	printf("\t\t6.æ‰¹é‡å¤„ç†\n");
+	printf("\t\t7.æ‰“å°æŠ¥è¡¨\n");
 	printf("----------------------------------------------\n");
 }
 //struct node* list = createlist();
-void keydown()//ÓÃ»§½»»¥º¯Êı
+void keydown()//ç”¨æˆ·äº¤äº’å‡½æ•°
 {
-	int up;//¹¤×ÊÕÇ·ù
-	int merit;//ÆÀÓÅ¼¨Ğ§¹¤×Ê±ê×¼
-	int choice;//¶¨Òå¹¦ÄÜ±àºÅ
-	int choice1;//¶¨ÒåÅúÁ¿´¦ÀíÄÚÈİ
-	int choice2;//¶¨ÒåÅúÁ¿ĞŞ¸Ä·½Ê½
-	int search;//¶¨Òå²éÕÒ·½Ê½
-	char bbnum[20],bbdepart[20];//¶¨Òå´òÓ¡±¨±í½ÌÊ¦±àºÅ¡¢±¨±í´òÓ¡²¿ÃÅ
-	char pldepart[20];//¶¨ÒåÅúÁ¿´¦ÀíµÄ²¿ÃÅ
-	char searchnum[20],searchdepart[20],changenum[20];//¶¨Òå²éÕÒµÄ¹¤ºÅ¡¢²éÕÒµÄ²¿ÃÅ¡¢ÓûĞŞ¸ÄµÄ½ÌÊ¦¹¤ºÅ
-	printf("ÇëÊäÈë¹¦ÄÜ±àºÅ£º\n");
+	int up;//å·¥èµ„æ¶¨å¹…
+	int merit;//è¯„ä¼˜ç»©æ•ˆå·¥èµ„æ ‡å‡†
+	int choice;//å®šä¹‰åŠŸèƒ½ç¼–å·
+	int choice1;//å®šä¹‰æ‰¹é‡å¤„ç†å†…å®¹
+	int choice2;//å®šä¹‰æ‰¹é‡ä¿®æ”¹æ–¹å¼
+	int search;//å®šä¹‰æŸ¥æ‰¾æ–¹å¼
+	char bbnum[20],bbdepart[20];//å®šä¹‰æ‰“å°æŠ¥è¡¨æ•™å¸ˆç¼–å·ã€æŠ¥è¡¨æ‰“å°éƒ¨é—¨
+	char pldepart[20];//å®šä¹‰æ‰¹é‡å¤„ç†çš„éƒ¨é—¨
+	char searchnum[20],searchdepart[20],changenum[20];//å®šä¹‰æŸ¥æ‰¾çš„å·¥å·ã€æŸ¥æ‰¾çš„éƒ¨é—¨ã€æ¬²ä¿®æ”¹çš„æ•™å¸ˆå·¥å·
+	printf("è¯·è¾“å…¥åŠŸèƒ½ç¼–å·ï¼š\n");
 	struct teacher data;
 	scanf("%d", &choice);
 	switch (choice)
 	{
 	case 0:
-		printf("¡¾ÏµÍ³Õı³£ÍË³ö£¬»¶Ó­ÄúÏÂ´ÎÊ¹ÓÃ¡¿\n");
+		printf("ã€ç³»ç»Ÿæ­£å¸¸é€€å‡ºï¼Œæ¬¢è¿æ‚¨ä¸‹æ¬¡ä½¿ç”¨ã€‘\n");
 			system("pause");
 			exit(0);
 		break;
 	case 1:
-		printf("\t\t¡¾»¶Ó­À´µ½Â¼ÈëĞÅÏ¢Ä£¿é¡¿\n");
-		printf("ÇëÊäÈë½ÌÊ¦ĞÅÏ¢£º\n");
+		printf("\t\tã€æ¬¢è¿æ¥åˆ°å½•å…¥ä¿¡æ¯æ¨¡å—ã€‘\n");
+		printf("è¯·è¾“å…¥æ•™å¸ˆä¿¡æ¯ï¼š\n");
 		scanf("%s%s%d%d%d%d", data.num, data.depart, &data.basepay, &data.meritpay, &data.jobpay, &data.cutpay);
 		insertnode(list, data);
 		break;
 	case 2:
-		printf("\t\t¡¾»¶Ó­À´µ½ĞÅÏ¢ä¯ÀÀÄ£¿é¡¿\n");
+		printf("\t\tã€æ¬¢è¿æ¥åˆ°ä¿¡æ¯æµè§ˆæ¨¡å—ã€‘\n");
 		printlist(list);
 		break;
 	case 3:
-		printf("\t\t¡¾»¶Ó­À´µ½ĞÅÏ¢²éÕÒÄ£¿é¡¿\n");
-		printf("¡¾ÇëÑ¡Ôñ²éÕÒ·½Ê½¡¿\n");
-		printf("1.½ÌÊ¦¹¤ºÅ²éÕÒ\t2.ËùÊô²¿ÃÅ²éÕÒ\n");
+		printf("\t\tã€æ¬¢è¿æ¥åˆ°ä¿¡æ¯æŸ¥æ‰¾æ¨¡å—ã€‘\n");
+		printf("ã€è¯·é€‰æ‹©æŸ¥æ‰¾æ–¹å¼ã€‘\n");
+		printf("1.æ•™å¸ˆå·¥å·æŸ¥æ‰¾\t2.æ‰€å±éƒ¨é—¨æŸ¥æ‰¾\n");
 		scanf("%d", &search);
 		switch (search)
 		{
 		case 1:
-			printf("ÇëÊäÈëËùÒª²éÕÒµÄ½ÌÊ¦¹¤ºÅ£º\n");
+			printf("è¯·è¾“å…¥æ‰€è¦æŸ¥æ‰¾çš„æ•™å¸ˆå·¥å·ï¼š\n");
 				scanf("%s",searchnum);
 				searchnode(list, searchnum);
 			break;
 		case 2:
-			printf("ÇëÊäÈëËùÒª²éÕÒµÄ²¿ÃÅÃû³Æ£º\n");
+			printf("è¯·è¾“å…¥æ‰€è¦æŸ¥æ‰¾çš„éƒ¨é—¨åç§°ï¼š\n");
 			scanf("%s", searchdepart);
 			searchnode1(list, searchdepart);
 			break;
 		default :
-			printf("¡¾ÊäÈëÑ¡Ôñ±àºÅÓĞÎó£¬ÇëÖØĞÂÊäÈë¡¿\n");
+			printf("ã€è¾“å…¥é€‰æ‹©ç¼–å·æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥ã€‘\n");
 			system("pause");
 			break;
 		}
 		break;
 	case 4:
-		printf("\t\t¡¾»¶Ó­À´µ½ĞÅÏ¢É¾³ıÄ£¿é¡¿\n");
-		printf("ÇëÊäÈëÉ¾³ıµÄ½ÌÊ¦¹¤ºÅ:\n");
+		printf("\t\tã€æ¬¢è¿æ¥åˆ°ä¿¡æ¯åˆ é™¤æ¨¡å—ã€‘\n");
+		printf("è¯·è¾“å…¥åˆ é™¤çš„æ•™å¸ˆå·¥å·:\n");
 		scanf("%s", data.num);
 		deleatnode(list, data.num);
 		break;
 	case 5:
-		printf("\t\t¡¾»¶Ó­À´µ½ĞÅÏ¢ĞŞ¸ÄÄ£¿é¡¿\n");
-		printf("ÇëÊäÈëÓûĞŞ¸ÄµÄ½ÌÊ¦¹¤ºÅ\n");
+		printf("\t\tã€æ¬¢è¿æ¥åˆ°ä¿¡æ¯ä¿®æ”¹æ¨¡å—ã€‘\n");
+		printf("è¯·è¾“å…¥æ¬²ä¿®æ”¹çš„æ•™å¸ˆå·¥å·\n");
 		scanf("%s", changenum);
 		changenode(list, changenum);
 		break;
 	case 6:
-		printf("--------[ÅúÁ¿´¦ÀíÄ£¿é]--------\n");
-		printf("\t1.ÅúÁ¿ä¯ÀÀĞÅÏ¢\n\t2.ÅúÁ¿É¾³ıĞÅÏ¢\n\t3.ÅúÁ¿ĞŞ¸ÄĞÅÏ¢\n");
+		printf("--------[æ‰¹é‡å¤„ç†æ¨¡å—]--------\n");
+		printf("\t1.æ‰¹é‡æµè§ˆä¿¡æ¯\n\t2.æ‰¹é‡åˆ é™¤ä¿¡æ¯\n\t3.æ‰¹é‡ä¿®æ”¹ä¿¡æ¯\n");
 		printf("------------------------------\n");
-		printf("ÇëÊäÈë¹¦ÄÜ±àºÅ: \n");
+		printf("è¯·è¾“å…¥åŠŸèƒ½ç¼–å·: \n");
 		scanf("%d", &choice1);
 		switch (choice1)
 		{
 		case 1:
-			printf("\t\t¡¾ÅúÁ¿ä¯ÀÀĞÅÏ¢¡¿\n");
-			printf("ÇëÊäÈëËùÒªä¯ÀÀµÄ²¿ÃÅ£º\n");
+			printf("\t\tã€æ‰¹é‡æµè§ˆä¿¡æ¯ã€‘\n");
+			printf("è¯·è¾“å…¥æ‰€è¦æµè§ˆçš„éƒ¨é—¨ï¼š\n");
 			scanf("%s", pldepart);
 			searchnode1(list, pldepart);
 			break;
 		case 2:
-			printf("\t\t¡¾ÅúÁ¿É¾³ıĞÅÏ¢¡¿\n");
-			printf("ÇëÑ¡ÔñËùÒªÉ¾³ıµÄ²¿ÃÅ \n");
+			printf("\t\tã€æ‰¹é‡åˆ é™¤ä¿¡æ¯ã€‘\n");
+			printf("è¯·é€‰æ‹©æ‰€è¦åˆ é™¤çš„éƒ¨é—¨ \n");
 				scanf("%s", pldepart);
 			deleatnode1(list, pldepart);
 			break;
 		case 3:
-			printf("\t\t¡¾ÅúÁ¿ĞŞ¸ÄĞÅÏ¢¡¿\n");
-			printf("ÇëÑ¡ÔñĞŞ¸Ä·½Ê½£º\n");
-			printf("1.°´²¿ÃÅ½øĞĞĞŞ¸Ä  2.°´¼¨Ğ§¹¤×Ê½øĞĞĞŞ¸Ä \n");
-			printf("ÇëÊäÈë¹¦ÄÜ±àºÅ£º \n");
+			printf("\t\tã€æ‰¹é‡ä¿®æ”¹ä¿¡æ¯ã€‘\n");
+			printf("è¯·é€‰æ‹©ä¿®æ”¹æ–¹å¼ï¼š\n");
+			printf("1.æŒ‰éƒ¨é—¨è¿›è¡Œä¿®æ”¹  2.æŒ‰ç»©æ•ˆå·¥èµ„è¿›è¡Œä¿®æ”¹ \n");
+			printf("è¯·è¾“å…¥åŠŸèƒ½ç¼–å·ï¼š \n");
 			scanf("%d", &choice2);
 			switch (choice2)
 			{
 			case 1:
-				printf("ÇëÊäÈë²¿ÃÅÃû³Æ£º\n");
+				printf("è¯·è¾“å…¥éƒ¨é—¨åç§°ï¼š\n");
 				scanf("%s", pldepart );
-				printf("²¿ÃÅ»ù±¾¹¤×ÊÕÇ·ù£º\n");
+				printf("éƒ¨é—¨åŸºæœ¬å·¥èµ„æ¶¨å¹…ï¼š\n");
 				scanf("%d", &up);
 				 upbasepay(list, pldepart, up);
 				break;
 			case 2:
-				printf("ÇëÊäÈëÆÀÓÅ¼¨Ğ§¹¤×Ê±ê×¼£º \n");
+				printf("è¯·è¾“å…¥è¯„ä¼˜ç»©æ•ˆå·¥èµ„æ ‡å‡†ï¼š \n");
 				scanf("%d", &merit);
-				printf("ÇëÊäÈëÖ°Îñ¹¤×ÊÕÇ·ù£º \n");
+				printf("è¯·è¾“å…¥èŒåŠ¡å·¥èµ„æ¶¨å¹…ï¼š \n");
 				scanf("%d", &up);
 				upjobpay(list, merit, up);
 				break; 
 			default:
-				printf("¡¾ÊäÈëÑ¡Ôñ±àºÅÓĞÎó£¬ÇëÖØĞÂÊäÈë¡¿\n");
+				printf("ã€è¾“å…¥é€‰æ‹©ç¼–å·æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥ã€‘\n");
 				system("pause");
 				break;
 			}
@@ -482,20 +482,20 @@ void keydown()//ÓÃ»§½»»¥º¯Êı
 		}
 		break;
 	case 7:
-		printf("--------[±¨±í´òÓ¡Ä£¿é]--------\n");
-		printf("\t1.Ö¸¶¨½ÌÊ¦±¨±í´òÓ¡\n\t2.Ö¸¶¨²¿ÃÅ±¨±í´òÓ¡\n\t3.È«²¿ĞÅÏ¢±¨±í´òÓ¡\n");
+		printf("--------[æŠ¥è¡¨æ‰“å°æ¨¡å—]--------\n");
+		printf("\t1.æŒ‡å®šæ•™å¸ˆæŠ¥è¡¨æ‰“å°\n\t2.æŒ‡å®šéƒ¨é—¨æŠ¥è¡¨æ‰“å°\n\t3.å…¨éƒ¨ä¿¡æ¯æŠ¥è¡¨æ‰“å°\n");
 		printf("------------------------------\n");
-		printf("ÇëÊäÈë¹¦ÄÜ±àºÅ: \n");
+		printf("è¯·è¾“å…¥åŠŸèƒ½ç¼–å·: \n");
 		scanf("%d", &choice1);
 		switch (choice1)
 		{
 		case 1:
-			printf("ÇëÊäÈë½ÌÊ¦¹¤ºÅ£º \n");
+			printf("è¯·è¾“å…¥æ•™å¸ˆå·¥å·ï¼š \n");
 			scanf("%s", bbnum);
 			writeExcel(list, bbnum);
 			break;
 		case 2:
-			printf("ÇëÊäÈë²¿ÃÅÃû³Æ£º \n");
+			printf("è¯·è¾“å…¥éƒ¨é—¨åç§°ï¼š \n");
 			scanf("%s", bbdepart);
 			writeExcel1(list, bbdepart);
 			break;
@@ -503,16 +503,16 @@ void keydown()//ÓÃ»§½»»¥º¯Êı
 			writeExcel2(list);
 			break;
 		default:
-			printf("¡¾ÊäÈë¹¦ÄÜ±àºÅÓĞÎó£¬ÇëÖØĞÂÊäÈë¡¿\n");
+			printf("ã€è¾“å…¥åŠŸèƒ½ç¼–å·æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥ã€‘\n");
 			system("pause");
 			break;
 		}
-		printf("ÇëÊäÈë½ÌÊ¦¹¤ºÅ£º \n");
+		printf("è¯·è¾“å…¥æ•™å¸ˆå·¥å·ï¼š \n");
 		scanf("%s", bbnum);
 		writeExcel(list,bbnum);
 		break;
 	default:
-		printf("¡¾ÊäÈë¹¦ÄÜ±àºÅÓĞÎó£¬ÇëÖØĞÂÊäÈë¡¿\n");
+		printf("ã€è¾“å…¥åŠŸèƒ½ç¼–å·æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥ã€‘\n");
 		system("pause");
 		break;
 	}
@@ -526,7 +526,7 @@ int main()
      menu();
 	 keydown();
 	 system("pause");
-	 system("cls");//ÇåÆÁ
+	 system("cls");//æ¸…å±
 	}
 	system("pause");
 	return 0;
