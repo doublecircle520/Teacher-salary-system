@@ -1,0 +1,5 @@
+case 1:
+		printf("【系统正常退出，欢迎您下次使用】\n");
+		system("pause");
+		exit(0);
+		break;
