@@ -1,0 +1,59 @@
+//删除指定部门信息
+void deleatnode1(struct node* headnode, char* depart)
+{
+	struct node* posnode = headnode->next;
+	struct node* frontnode = headnode;
+	int flag = 0;
+	if (posnode == NULL)
+	{
+		printf("【数据为空，无法删除】\n");
+		return;
+	}
+	while (posnode != NULL)
+	{
+		if (strcmp(posnode->data.depart, depart) == 0)
+		{
+			frontnode->next = posnode->next;
+			free(posnode);
+			flag++;
+			posnode = frontnode->next;
+		}
+		else
+		{
+			frontnode = posnode;
+			posnode = frontnode->next;
+		}
+	}
+	if (flag == 0)
+	{
+		printf("未找到%s教师信息\n", depart);
+	}
+	else
+	{
+		printf("%s教师信息删除成功\n", depart);
+	}
+}
+//删除指定教师信息
+void deleatnode(struct node* headnode, char* num)
+{
+	struct node* posnode = headnode->next;
+	struct node* frontnode = headnode;
+	if (posnode == NULL)
+	{
+		printf("【数据为空，无法删除】\n");
+		return;
+	}
+	while (strcmp(posnode->data.num, num))
+	{
+		frontnode = posnode;
+		posnode = frontnode->next;
+		if (posnode == NULL)
+		{
+			printf("【未找到指定位置，无法删除】\n");
+			return;
+		}
+	}
+	frontnode->next = posnode->next;
+	free(posnode);
+	printf("【指定信息删除成功】\n");
+}//链表查找(部门名称查找)
