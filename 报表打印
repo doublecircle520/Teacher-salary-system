@@ -1,0 +1,69 @@
+//生成指定教师工资报表
+void writeExcel(struct node* headnode, char* num)
+{
+	FILE* fp = NULL;
+	struct node* movenode = headnode->next;
+	fp = fopen("D:\\指定教师工资条.xls", "w");
+	while (movenode != NULL)
+	{
+		if (strcmp(movenode->data.num, num) == 0)
+		{
+			fprintf(fp, "教师工号\t部门名称\t基本工资\t绩效工资\t职务工资\t扣款\t实发工资\n");
+			fprintf(fp, "%s\t%s\t%d\t%d\t%d\t%d\t%d", movenode->data.num, movenode->data.depart, movenode->data.basepay, movenode->data.meritpay, movenode->data.jobpay, movenode->data.cutpay, movenode->data.finalpay);
+		}
+		movenode = movenode->next;
+	}
+	printf("工资报表生成成功！\n");
+	fclose(fp);
+}
+//生成指定部门工资报表
+void writeExcel1(struct node* headnode, char* depart)
+{
+	FILE* fp = NULL;
+	int flag = 0;
+	struct node* movenode = headnode->next;
+	fp = fopen("D:\\指定部门工资条.xls", "w");
+	while (movenode != NULL)
+	{
+		if (strcmp(movenode->data.depart, depart) == 0)
+		{
+			if (flag == 0)
+			{
+				fprintf(fp, "教师工号\t部门名称\t基本工资\t绩效工资\t职务工资\t扣款\t实发工资\n");
+				fprintf(fp, "%s\t%s\t%d\t%d\t%d\t%d\t%d\n", movenode->data.num, movenode->data.depart, movenode->data.basepay, movenode->data.meritpay, movenode->data.jobpay, movenode->data.cutpay, movenode->data.finalpay);
+				flag++;
+			}
+			else
+			{
+				fprintf(fp, "%s\t%s\t%d\t%d\t%d\t%d\t%d\n", movenode->data.num, movenode->data.depart, movenode->data.basepay, movenode->data.meritpay, movenode->data.jobpay, movenode->data.cutpay, movenode->data.finalpay);
+			}
+		}
+		movenode = movenode->next;
+	}
+	printf("%s工资报表生成成功！\n", depart);
+	fclose(fp);
+}
+//打印所有教师工资报表
+void writeExcel2(struct node* headnode)
+{
+	FILE* fp = NULL;
+	int flag = 0;
+	struct node* movenode = headnode->next;
+	fp = fopen("D:\\全部教师工资条.xls", "w");
+	while (movenode != NULL)
+	{
+		if (flag == 0)
+		{
+			fprintf(fp, "教师工号\t部门名称\t基本工资\t绩效工资\t职务工资\t扣款\t实发工资\n");
+			fprintf(fp, "%s\t%s\t%d\t%d\t%d\t%d\t%d\n", movenode->data.num, movenode->data.depart, movenode->data.basepay, movenode->data.meritpay, movenode->data.jobpay, movenode->data.cutpay, movenode->data.finalpay);
+			flag++;
+		}
+		else
+		{
+			fprintf(fp, "%s\t%s\t%d\t%d\t%d\t%d\t%d\n", movenode->data.num, movenode->data.depart, movenode->data.basepay, movenode->data.meritpay, movenode->data.jobpay, movenode->data.cutpay, movenode->data.finalpay);
+		}
+		movenode = movenode->next;
+	}
+	printf("全部教师工资报表生成成功！\n");
+	fclose(fp);
+}
