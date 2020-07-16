@@ -1,0 +1,16 @@
+//文件读操作
+void readfile(struct node* headnode, char* filename)
+{
+	//打开文件
+	FILE* fp;
+	struct teacher data;
+	fp = fopen(filename, "r");
+	//读文件
+	while (!feof(fp))
+	{
+		fscanf(fp, "%s\t%s\t%d\t%d\t%d\t%d\n", data.num, data.depart, &data.basepay, &data.meritpay, &data.jobpay, &data.cutpay);
+		insertnode(list, data);
+	}
+	//关闭文件
+	fclose(fp);
+}
