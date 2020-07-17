@@ -1,0 +1,77 @@
+//修改指定教师信息
+void changenode(struct node* headnode, char* num)
+{
+	struct node* pmove = headnode->next;
+	if (pmove == NULL)
+	{
+		printf("【链表为空，不可修改】\n");
+		return;
+	}
+	while (strcmp(pmove->data.num, num))
+	{
+		pmove = pmove->next;
+		if (pmove == NULL)
+			break;
+	}
+	if (pmove)
+	{
+		printf("请输入修改信息\n");
+		scanf("%s%s%d%d%d%d", pmove->data.num, pmove->data.depart, &pmove->data.basepay, &pmove->data.meritpay, &pmove->data.jobpay, &pmove->data.cutpay);
+		pmove->data.finalpay = pmove->data.basepay + pmove->data.meritpay + pmove->data.jobpay - pmove->data.cutpay;
+		printf("【修改信息成功】\n");
+		return;
+	}
+	else
+	{
+		printf("【无相关信息，无法修改】\n");
+		return;
+	}
+}
+//修改指定部门基本工资
+void upbasepay(struct node* headnode, char* depart, int up)
+{
+	int flag = 0;
+	struct node* movenode = headnode->next;
+	while (movenode != NULL)
+	{
+		if (strcmp(movenode->data.depart, depart) == 0)
+		{
+			movenode->data.basepay = movenode->data.basepay + up;
+			movenode->data.finalpay = movenode->data.basepay + movenode->data.meritpay + movenode->data.jobpay - movenode->data.cutpay;
+			flag++;
+		}
+		movenode = movenode->next;
+	}
+	if (flag == 0)
+	{
+		printf("未找到相关部门信息！\n");
+	}
+	else
+	{
+		printf("%s %d名教师基本工资修改完毕。\n", depart, flag);
+	}
+}
+//根据绩效修改职务工资
+void upjobpay(struct node* headnode, int merit, int up)
+{
+	int flag = 0;
+	struct node* movenode = headnode->next;
+	while (movenode != NULL)
+	{
+		if (movenode->data.meritpay > merit || movenode->data.meritpay == merit)
+		{
+			movenode->data.jobpay = movenode->data.jobpay + up;
+			movenode->data.finalpay = movenode->data.basepay + movenode->data.meritpay + movenode->data.jobpay - movenode->data.cutpay;
+			flag++;
+		}
+		movenode = movenode->next;
+	}
+	if (flag == 0)
+	{
+		printf("绩效工资涨薪标准过高，未能找到符合数据 ！\n");
+	}
+	else
+	{
+		printf("已为%d名优秀教师提高职务工资.\n", flag);
+	}
+}
